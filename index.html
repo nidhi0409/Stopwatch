@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stopwatch</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="main">
+	<div id="container1">
+		0:0:0
+		<br>
+		<br>
+	</div>
+	<div class="button">
+	<button onclick="start()" type="submit">START</button>
+	<button onclick="stop()" type="submit" id="stop">STOP</button>
+	<button onclick="resume()" type="submit" id="resume">RESUME</button>
+	<button onclick="clear()" type="submit" id="clear">CLEAR</button>
+	</div>
+
+<script type="text/javascript">
+	
+	var sec = 0;
+	var hr = 0;
+	var min = 0;
+	var myInterval='';
+	function start() {
+		myInterval= setInterval(update,1000);
+	}
+	function update() {
+		//set the onclick listners here
+		document.getElementById('stop').onclick=()=>{stop();};
+		document.getElementById('resume').onclick=()=>{resume();};
+		document.getElementById('clear').onclick=()=>{clear();};
+		sec=sec+1;
+		if (sec>59) {
+			min=min+1;
+			sec=0;
+			if (min>59) {
+				hr=hr+1;
+				min=0;
+				sec=0;
+				if (hr>11) {
+					hr=0;
+					min=0;
+					sec=0;
+				}
+			}
+		}
+		document.getElementById('container1').innerHTML= hr+':'+min+':'+sec;
+		
+
+	function stop() {
+		clearInterval(myInterval);
+	}
+	function resume() {
+		myInterval= setInterval(update,1000);
+	}
+	function clear(){
+		clearInterval(myInterval);
+		hr=min=sec=0;
+		document.getElementById('container1').innerHTML= hr+':'+min+':'+sec;
+	}
+	}
+</script>
+
+</body>
+</html>
